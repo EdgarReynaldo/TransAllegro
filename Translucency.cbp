@@ -40,6 +40,10 @@
 		<Unit filename="src/win/helpers/globals.hpp" />
 		<Unit filename="src/win/helpers/ogl.cpp" />
 		<Unit filename="src/win/helpers/ogl.hpp" />
+		<Unit filename="src/win/helpers/wglarb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/win/helpers/wglarb.h" />
 		<Unit filename="src/win/win32_wgl.cpp" />
 		<Unit filename="src/win/win32_wgl.hpp" />
 		<Unit filename="src/win/win32_wgl_trans.cpp" />
