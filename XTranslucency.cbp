@@ -30,7 +30,18 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="/usr/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-lX11" />
+			<Add option="-lGLX" />
+			<Add option="-lGLU" />
+			<Add option="-lGL" />
+			<Add option="-lXrender" />
+			<Add directory="/usr/X11/lib" />
+			<Add directory="/usr/lib/x86_64-linux-gnu" />
+		</Linker>
+		<Unit filename="src/x11/xglx_trans.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
