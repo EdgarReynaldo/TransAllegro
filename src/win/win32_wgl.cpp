@@ -63,8 +63,8 @@ bool EnableOpenGL(HWND hwnd, HDC* hDC, HGLRC* hRC)
 
     // create and enable the render context (RC)
     int context_attribs[] = {
-       WGL_CONTEXT_MAJOR_VERSION_ARB, 2,
-       WGL_CONTEXT_MINOR_VERSION_ARB, 1,
+       WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
+       WGL_CONTEXT_MINOR_VERSION_ARB, 0,
        0, 0
     };
     *hRC = wglarb_CreateContextAttribsARB(*hDC, NULL, context_attribs);

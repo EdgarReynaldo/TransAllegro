@@ -17,17 +17,19 @@ PFNGLBLENDFUNCSEPARATEPROC glBlendFuncSeparate = nullptr;
 
 
 void Draw(double theta , double width , double height) {
+   glDisable(GL_BLEND);
+   glBlendFuncSeparate(GL_ONE , GL_ZERO , GL_ONE , GL_ZERO);
+   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+   glClear(GL_COLOR_BUFFER_BIT);
    glEnable(GL_BLEND);
    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
    glDisable(GL_DEPTH_TEST);
 
-   glBlendFuncSeparate(GL_ONE , GL_ZERO , GL_ONE , GL_ZERO);
-   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-   glClear(GL_COLOR_BUFFER_BIT);
-   glBlendFuncSeparate(GL_ONE, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+   glBlendFuncSeparate(GL_ONE, GL_ZERO, GL_ONE, GL_ZERO);
    for (int i = -30 ; i <= 0 ; ++i) {
-      DrawOurTriangle(theta + i , width , height , (i + 30)*(i + 30)/900.0);
+//      DrawOurTriangle(theta + i , width , height , (i + 30)*(i + 30)/900.0);
    }
+   DrawOurTriangle(theta , width , height , 1.0);
    glFlush();
    
 }

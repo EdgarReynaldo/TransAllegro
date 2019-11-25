@@ -56,14 +56,14 @@ LPCTSTR Win32Window::RegisterWinClass() {
    memset(&wcex , 0 , sizeof(WNDCLASSEX));
    
    wcex.cbSize = sizeof(WNDCLASSEX);
-   wcex.style = 0;//???
+   wcex.style = CS_OWNDC;//???
    wcex.lpfnWndProc = WindowProc;
    wcex.cbClsExtra = 0;
    wcex.cbWndExtra = 0;
    wcex.hInstance = hInstance;
    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-   wcex.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+   wcex.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
    wcex.lpszMenuName = NULL;
    wcex.lpszClassName = classname;
    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);;
@@ -147,7 +147,7 @@ bool Win32Window::Create() {
 		}
 	}
 
-   hwnd = CreateWindowEx(WS_EX_APPWINDOW | WS_EX_TRANSPARENT | WS_EX_LAYERED | WS_EX_TOPMOST,
+   hwnd = CreateWindowEx(WS_EX_APPWINDOW | WS_EX_TOPMOST,
                         cname,
                         TEXT("OpenGL Transparency Test"),
                         WS_POPUP,
@@ -179,8 +179,8 @@ bool Win32Window::Create() {
 		}
 
 		if(fnDwmExtendFrameIntoClientArea) {
-//			MARGINS margins = {-1};
-//			fnDwmExtendFrameIntoClientArea(hwnd, &margins);
+			MARGINS margins = {-1};
+			fnDwmExtendFrameIntoClientArea(hwnd, &margins);
 		}
 	}
 
@@ -188,11 +188,12 @@ bool Win32Window::Create() {
    if (!EnableOpenGL(hwnd, &hDC, &hGLRC)) {
       printf("Failed to enable opengl!");
    }
-   
-   if (!SetLayeredWindowAttributes(hwnd , colkey , 255 , ULW_ALPHA)) {
-      printf("Failed to set layered window attributes.\n");
-   }
 //**
+   
+//   if (!SetLayeredWindowAttributes(hwnd , colkey , 255 , ULW_ALPHA)) {
+//      printf("Failed to set layered window attributes.\n");
+//   }
+//*/
    POINT d;
    d.x = sxpos;
    d.y = sypos;
@@ -206,13 +207,16 @@ bool Win32Window::Create() {
 ///   Draw(0.0 , swidth , sheight);
    
    HDC screen = GetDC(NULL);
-   
-//   if (!UpdateLayeredWindow(hwnd , screen , &d , &s , hDC , &src , colkey , &blender , ULW_ALPHA)) {
-//      printf("Failed to update layered window!!! (%lu)" , GetLastError());
-//   }
+
+/**
+   if (!UpdateLayeredWindow(hwnd , screen , &d , &s , hDC , &src , colkey , &blender , ULW_ALPHA)) {
+      printf("Failed to update layered window!!! (%lu)" , GetLastError());
+   }
+//*/   
 
    ReleaseDC(NULL , screen);
-//*/   
+
+
    ShowWindow(hwnd, SW_SHOW);
 
    return (bool)hwnd;
